@@ -95,4 +95,4 @@ def getDrama(title):
 
     return drama
 
-print(getDrama(input(" >> ")))
+print(getCharacter(input(" >> ")))
