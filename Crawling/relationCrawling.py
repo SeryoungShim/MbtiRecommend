@@ -89,6 +89,7 @@ def getMbc(url):
     for img in soup.select("img"):
         if "jpg" in img["src"]:
             return img["src"]
+    return
 
 
 title, url = get_tv(input(' >> '))
