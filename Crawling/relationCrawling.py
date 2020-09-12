@@ -92,7 +92,7 @@ def getMbc(url):
     return
 
 
-title, url = get_tv(input(' >> '))
+# title, url = get_tv(input(' >> '))
 # if 방송사 == tvn
 # getTvn(url)
 # if 방송사 == jtbc
