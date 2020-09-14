@@ -29,13 +29,6 @@ def addDrama(request):
 
 def crawlDrama(request, drama_name):
     context = {
-<<<<<<< HEAD
-        "title":drama_name,
-    }
-
-    # crawling 진행 - 세령
-    
-=======
         "title":drama_name,   
     }
 
@@ -62,6 +55,5 @@ def crawlDrama(request, drama_name):
             mbti = "INTJ"
         )
     context["character"] = Character.objects.filter(drama=drama)
->>>>>>> 44bfbcafcabcf0c28caf90ca381569e146efdf78
 
     return render(request, "addDrama.html", context)
