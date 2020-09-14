@@ -20,10 +20,14 @@ def addDrama(request):
 
 def crawlDrama(request, drama_name):
     context = {
-        "title":drama_name,
-        "db" : True,    
+        "title":drama_name,   
     }
 
     # crawling 진행 - 세령
+    drama = dc.getDrama(drama_name)
+    character = dc.getCharacter(drama_name)
+    context["drama"] = drama
+    context["db"] = True
+    context["character"] = character
 
     return render(request, "addDrama.html", context)
