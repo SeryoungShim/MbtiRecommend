@@ -13,8 +13,8 @@
     </form>
     <div class="container">
         {% if db %}
-            {{drama}}
-            {{character}}
+            {{drama.title}} {{drama.plot}}
+            <!-- {{character}} -->
         {% else %}
             {% if title %}
                 <a href="{% url 'crawlDrama' title %}">'{{title}}' 데이터 가져오기</a>
