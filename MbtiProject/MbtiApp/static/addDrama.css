@@ -1,0 +1,7 @@
+#loading {
+    display: none;
+}
+
+.poster {
+    clip: rect( 50px, 90px, 100px, 50px );
+}
