@@ -9,7 +9,7 @@ class DramaInfo(models.Model):
     site = models.TextField()
 
 class Character(models.Model):
-    drama =  models.ForeignKey(DramaInfo)
+    drama =  models.ForeignKey('DramaInfo', on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     poster = models.TextField()
     description = models.TextField()
