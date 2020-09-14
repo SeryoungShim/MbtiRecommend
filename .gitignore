@@ -1,9 +1,12 @@
 .DS_Store
 .vscode
-Project/db.sqlite3
+MbtiProject/db.sqlite3
 **/db.sqlite3
 __pycache__
 
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py
+
+Pipfile
+Pipfile.lock
