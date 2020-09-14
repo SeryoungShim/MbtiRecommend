@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .crawling import dramaCrawling as dc
 
 # DB
-from .models import DramaInfo
+from .models import DramaInfo, Character
 
 # Create your views here.
 def addDrama(request):
@@ -28,9 +28,8 @@ def crawlDrama(request, drama_name):
 
     # crawling 진행 - 세령
     drama = dc.getDrama(drama_name)
-    character = dc.getCharacter(drama_name)
+    characters = dc.getCharacter(drama_name)
     context["db"] = True
-    context["character"] = character
 
     drama = DramaInfo.objects.create(
         title=drama["title"],
@@ -39,5 +38,16 @@ def crawlDrama(request, drama_name):
         site=drama["main_home"]
     )
     context["drama"] = drama
+
+    for character in characters:
+        Character.objects.create(
+            drama = drama,
+            name = character["name"],
+            poster = character["picture"],
+            description = character["describe"],
+            personal = "#훗",
+            mbti = "INTJ"
+        )
+    context["character"] = Character.objects.filter(drama=drama)
 
     return render(request, "addDrama.html", context)
