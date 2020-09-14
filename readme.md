@@ -12,3 +12,6 @@ $ pipenv install django
 ```bash
 $ pipenv install -r requirements.txt
 ```
+
+---
+백엔드 팀 : 현재 관리자 페이지 작성중...
