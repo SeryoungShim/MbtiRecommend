@@ -15,7 +15,6 @@ def addDrama(request):
         # 2-2. 없다면 db = False
         # 3. 아래 pass 지우기
         pass
-        context["title"] = request.POST["search"]
 
     return render(request, "addDrama.html", context)
 
