@@ -8,16 +8,25 @@ from .models import DramaInfo, Character
 
 # Create your views here.
 def addDrama(request):
-    context = {}
-    if request.POST:
-        # print(dc.getDrama("넝쿨째 굴러온 당신"))
+    context = {
+    "db" : True
+    }
 
+    if request.POST:
+        #print(dc.getDrama("넝쿨째 굴러온 당신"))
+        context["title"] = request.POST.get('search')
         # 1. POST search 값 변수에 저장 - context["title"] 에 저장
         # 2. db 드라마 제목에서 search 값이 있는지 확인
         # 2-1. 있다면 db = True / drama = db읽어오기
+        
+        if len(DramaInfo.objects.filter(title = context["title"])) != 0:
+            title = DramaInfo.objects.get(title = context["title"])
+            context['drama'] = title
+
         # 2-2. 없다면 db = False
+        else:
+            db = False
         # 3. 아래 pass 지우기
-        pass
 
     return render(request, "addDrama.html", context)
 
