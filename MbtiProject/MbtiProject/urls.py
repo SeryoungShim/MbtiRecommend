@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from MbtiApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path("adddrama/", views.addDrama, name="addDrama"),
+    path("adddrama/<str:drama_name>", views.crawlDrama, name="crawlDrama"),
+    
 ]

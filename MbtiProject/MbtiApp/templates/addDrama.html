@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+</head>
+<body>
+    <form method="POST" action="{% url 'addDrama' %}">
+        {% csrf_token %}
+        <input type="text" name="search">
+        <button type="submit">검색</button>
+    </form>
+    <div class="container">
+        {% if db %}
+            {{drama}}
+        {% else %}
+            {% if title %}
+                <a href="{% url 'crawlDrama' title %}">'{{title}}' 데이터 가져오기</a>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
