@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 페이지</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'addDrama.css' %}">
 </head>
 <body>
     <form method="POST" action="{% url 'addDrama' %}">
@@ -13,12 +15,27 @@
     </form>
     <div class="container">
         {% if db %}
-            {{drama}}
+            {{drama.title}} 
+            <img class="poster" src={{drama.image}}>
+            {{drama.plot}}
+            {{character}}
         {% else %}
             {% if title %}
-                <a href="{% url 'crawlDrama' title %}">'{{title}}' 데이터 가져오기</a>
+                <a id="getCrawl" href="{% url 'crawlDrama' title %}">'{{title}}' 데이터 가져오기</a>
+                <img id="loading" src="https://media0.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif">
             {% endif %}
         {% endif %}
     </div>
+
+    <script>
+        var crawl_btn = document.querySelector("#getCrawl");
+        var loading_img = document.querySelector("#loading");
+        if (crawl_btn) {
+            crawl_btn.addEventListener("click", ()=>{
+                crawl_btn.style.display = "none";
+                loading_img.style.display = "inline";
+            });
+        }
+    </script>
 </body>
 </html>
