@@ -15,3 +15,6 @@ $ pipenv install -r requirements.txt
 
 ---
 백엔드 팀 : 현재 관리자 페이지 작성중...
+
+### DB (2020.09.14)
+![image](https://user-images.githubusercontent.com/45345120/93066180-9efabc80-f6b4-11ea-9a15-2f2a8cc5df5a.png) 
