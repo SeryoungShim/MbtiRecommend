@@ -21,9 +21,9 @@ def addDrama(request):
 def crawlDrama(request, drama_name):
     context = {
         "title":drama_name,
-        "db" : True,    
     }
 
     # crawling 진행 - 세령
+    
 
     return render(request, "addDrama.html", context)
