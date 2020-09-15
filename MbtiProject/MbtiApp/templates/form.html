@@ -21,7 +21,42 @@
     <input placeholder = "드라마 공식사이트" name = 'site'/>
     <br/>
     <br/>
+    <div class="characters">
+        <div class="character">
+            <input placeholder="주인공 이름" name = "name[]"/>
+            <input placeholder="주인공 포스터" name = "poster[]"/>
+            <input placeholder="주인공 설명" name = "desc[]"/>
+        </div>
+    </div>
+    <button type="button" id="add">add</button>
     <button type='submit'>등록하기 > </button>
     </form>
+
+    <script>
+        var add_btn = document.getElementById("add");
+        var div = document.querySelector(".character");
+        var cnt = 2;
+        function clickAddHandler(){
+            var new_div = document.createElement("div");
+            div.appendChild(new_div);
+            var new_input = document.createElement("input");
+            new_div.appendChild(new_input);
+            new_input.setAttribute("placeholder", "주인공 이름");
+            new_input.setAttribute("name", "name[]");
+            new_div.appendChild(new_input);
+            new_input = document.createElement("input");
+            new_input.setAttribute("placeholder", "주인공 포스터");
+            new_input.setAttribute("name", "poster[]");
+            new_div.appendChild(new_input);
+            new_input = document.createElement("input");
+            new_input.setAttribute("placeholder", "주인공 설명");
+            new_input.setAttribute("name", "desc[]");
+            new_div.appendChild(new_input);
+            console.log(new_div);
+            cnt += 1;
+        }
+        add_btn.addEventListener("click", clickAddHandler);
+    </script>
+
 </body>
 </html>

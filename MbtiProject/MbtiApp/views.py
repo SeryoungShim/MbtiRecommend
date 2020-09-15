@@ -7,6 +7,10 @@ from .crawling import dramaCrawling as dc
 from .models import DramaInfo, Character
 
 # Create your views here.
+
+
+
+### admin page "/adddrama/"
 def addDrama(request):
     context = {}
 
@@ -75,6 +79,19 @@ def insertDrama(request):
             site = request.POST['site']
         )
         
-        context["drama"] = drama
+        # context["drama_infos"] = {"drama":drama}
+        names = request.POST.getlist('name[]')
+        posters = request.POST.getlist('poster[]')
+        desc = request.POST.getlist('desc[]')
+        for i in range(len(names)):
+            Character.objects.create(
+                drama = drama,
+                name = names[i],
+                poster = posters[i],
+                description = desc[i],
+                personal = "#훗",
+                mbti = "INTJ"
+            )
+        
         
     return render(request, "addDrama.html", context)
