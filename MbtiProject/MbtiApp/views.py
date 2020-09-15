@@ -24,10 +24,8 @@ def addDrama(request):
             for drama in context["dramas"]:
                 context["drama_infos"].append({"drama":drama, "characters":Character.objects.filter(drama=drama)})
             context["db"] = True
-        # 2-2. 없다면 db = False
         else:
             context['db'] = False
-        # 3. 아래 pass 지우기
 
     return render(request, "addDrama.html", context)
 
