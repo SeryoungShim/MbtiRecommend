@@ -19,4 +19,4 @@ $ pipenv install -r requirements.txt
 ### DB (2020.09.14)
 ![image](https://user-images.githubusercontent.com/45345120/93066180-9efabc80-f6b4-11ea-9a15-2f2a8cc5df5a.png) 
 ### admin page(2020.09.14)
-![ezgif com-video-to-gif (2)](https://user-images.githubusercontent.com/45345120/93067801-a1f6ac80-f6b6-11ea-89cd-420a663582bb.gif)
+![image](https://user-images.githubusercontent.com/45345120/93158495-2db81980-f747-11ea-97a9-84c865af2988.png)
