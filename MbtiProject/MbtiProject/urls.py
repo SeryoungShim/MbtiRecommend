@@ -22,5 +22,6 @@ urlpatterns = [
 
     path("adddrama/", views.addDrama, name="addDrama"),
     path("adddrama/<str:drama_name>", views.crawlDrama, name="crawlDrama"),
+    path("adddrama/insert/", views.insertDrama, name="insertDrama")
     
 ]
