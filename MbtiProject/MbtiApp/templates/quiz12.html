@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" href="{% static 'css/quiz2.css' %}" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card_main">
+            <div class="blank"></div>
+            <br />
+            <h1>Q12. 새로운 일에 도전할 때, 나는? </h1>
+            <br />
+            <div class="blank"></div>
+        </div>
+        <form method="POST" action="{% url 'result' %}">
+            {% csrf_token %}
+            <div class="card_quiz">
+                <button class="select_btn_1" value="S" name="select">실패하면 안되는데..<br />(여러 가능성
+                    따져봄)</button>
+                <br />
+                <button class="select_btn_2" value="N" name="select">이거 성공하면 대박임..<br />(동기부여
+                    확실히)</button>
+            </div>
+        </form>
+        <div class="bar">
+            <img src="{% static 'source/12P.png' %}" width="300" height="30" />
+        </div>
+    </div>
+</body>
+
+</html>

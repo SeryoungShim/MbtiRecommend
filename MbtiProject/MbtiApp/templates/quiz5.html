@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" href="{% static 'css/quiz2.css' %}" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card_main">
+            <div class="blank"></div>
+            <br />
+            <h1>Q5. 모처럼 쉬는 휴일, 나는?</h1>
+            <br />
+            <div class="blank"></div>
+        </div>
+        <form method="POST" action="{% url 'mbti' 6 %}">
+            {% csrf_token %}
+            <div class="card_quiz">
+                <button class="select_btn_1" value="E" name="select">친구랑 살얼음 맥주에 치킨 각!</button>
+                <br />
+                <button class="select_btn_2" value="I" name="select">집에서 넷플릭스 & 치맥 각이지</button>
+            </div>
+        </form>
+        <div class="bar">
+            <img src="{% static 'source/5P.png' %}" width="300" height="30" />
+        </div>
+    </div>
+</body>
+
+</html>

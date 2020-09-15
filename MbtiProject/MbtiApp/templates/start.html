@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/start.css' %}" />
+</head>
+
+<body>
+    <div class="main">
+        <h1>주인공은 나야나</h1>
+        <img class="main_img" src="{% static 'source/main.png' %}" width="350px" height="126px" />
+        <br />
+        <a class="start_btn" href="{% url 'mbti_home' %}">
+            <img class="start_btn_img" src="{% static 'source/startbtn.png' %}" width="210px" height="48px">
+        </a>
+    </div>
+</body>
+
+</html>

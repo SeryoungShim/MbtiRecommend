@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" href="{% static 'css/quiz2.css' %}" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card_main">
+            <div class="blank"></div>
+            <br />
+            <h1>Q3. 친구와 제주도 여행을 갈 때, 나는?</h1>
+            <br />
+            <div class="blank"></div>
+        </div>
+        <form method="POST" action="{% url 'mbti' 4 %}">
+            {% csrf_token %}
+            <div class="card_quiz">
+                <button class="select_btn_1" value="J" name="select">오늘 이 다섯 군데 정도는 가줘야
+                    돼!</button>
+                <br />
+                <button class="select_btn_2" value="P" name="select">하얀 천이랑 바람만 있으면<br />
+                    어디든 갈 수 있어~ </button>
+            </div>
+        </form>
+        <div class="bar">
+            <img src="{% static 'source/3P.png' %}" width="300" height="30" />
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" href="{% static 'css/quiz1.css' %}" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card_main">
+            <div class="blank"></div>
+            <h1> Q1. 딱 봤을 때, 순간 드는 생각은? </h1>
+            <br />
+            <img src="{% static 'source/ocean.jpg' %}" width="280" height="150" />
+            <br />
+            <br />
+        </div>
+        <form method="POST" action="{% url 'mbti' 2 %}">
+            {% csrf_token %}
+            <div class="card_quiz">
+                <button type="submit" class="select_btn_1" value="S" name="select">물 색깔 짱 예뻐..</button>
+                <br />
+                <button type="submit" class="select_btn_2" value="N" name="select">와 .. 당장 물놀이 ㄱ </button>
+            </div>
+        </form>
+        <div class="bar">
+            <img src="{% static 'source/1P.png' %}" width="300" height="30" />
+        </div>
+    </div>
+</body>
+
+</html>

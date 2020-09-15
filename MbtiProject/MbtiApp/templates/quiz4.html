@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" href="{% static 'css/quiz2.css' %}" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card_main">
+            <div class="blank"></div>
+            <br />
+            <h1>Q4. 밥을 늦게 먹는 친한 친구와<br /> 식사할 때, 나는?</h1>
+            <br />
+            <div class="blank"></div>
+        </div>
+        <form method="POST" action="{% url 'mbti' 5 %}">
+            {% csrf_token %}
+            <div class="card_quiz">
+                <button class="select_btn_1" value="T" name="select">내 속도로 먹고, 기다리기</button>
+                <br />
+                <button class="select_btn_2" value="F" name="select">다 먹었어도, 뭐라도 먹는 척</button>
+            </div>
+        </form>
+        <div class="bar">
+            <img src="{% static 'source/4P.png' %}" width="300" height="30" />
+        </div>
+    </div>
+</body>
+
+</html>

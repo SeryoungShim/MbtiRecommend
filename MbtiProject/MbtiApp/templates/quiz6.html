@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" href="{% static 'css/quiz2.css' %}" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card_main">
+            <div class="blank"></div>
+            <br />
+            <h1>Q6. 친구가 드라마를 <br />추천해달라고 할 때, 나는?</h1>
+            <br />
+            <div class="blank"></div>
+        </div>
+        <form method="POST" action="{% url 'mbti' 7 %}">
+            {% csrf_token %}
+            <div class="card_quiz">
+                <button class="select_btn_1" value="S" name="select">최근에 본 것 중에 이거 존잼ㅋㅋ</button>
+                <br />
+                <button class="select_btn_2" value="N" name="select">어떤 장르, 배우 좋아해? <br />맞춤형
+                    추천해줌ㅎ
+                </button>
+            </div>
+        </form>
+        <div class="bar">
+            <img src="{% static 'source/6P.png' %}" width="300" height="30" />
+        </div>
+    </div>
+</body>
+
+</html>

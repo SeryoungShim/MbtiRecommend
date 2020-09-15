@@ -20,8 +20,14 @@ from MbtiApp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    path('', views.home, name="home"),
+    path('mbti/', views.mbti_home, name="mbti_home"),
+    path('mbti/<int:quiz>', views.mbti, name="mbti"),
+    path('result', views.result, name="result"),
+
+    ### admin
     path("adddrama/", views.addDrama, name="addDrama"),
     path("adddrama/<str:drama_name>", views.crawlDrama, name="crawlDrama"),
-    path("adddrama/insert/", views.insertDrama, name="insertDrama")
+    path("adddrama/insert/", views.insertDrama, name="insertDrama"),
     
 ]
