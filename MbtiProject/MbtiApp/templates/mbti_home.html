@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mbti_home.css' %}" />
+</head>
+
+<body>
+    <div class="main">
+        <h1>MBTI 입력하기</h1>
+        <div class="blank"></div>
+        <div class="main_msg">
+            <span class="main_txt">성격 정보만을 입력해</span>
+            <span class="main_txt">나와 비슷한 성향의 드라마 주인공 매력에</span>
+            <span class="main_txt">푹~ 빠져보세요!</span>
+        </div>
+        <div class="blank"></div>
+        <form>
+            <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px">
+            <button class="submit_btn" type="submit">제출</button>
+            <br />
+        </form>
+        <div class="blank_2"></div>
+        <button class="test_btn" onclick='window.location.href="{% url 'mbti' 1 %}"'>모른다면, 검사하러 가기!</button>
+    </div>
+</body>
+
+</html>

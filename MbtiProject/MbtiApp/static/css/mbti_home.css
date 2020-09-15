@@ -1,0 +1,85 @@
+@font-face {
+    font-family: 'GmarketSans';
+    src: url("../fonts/GmarketSansTTFMedium.ttf");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-family: "GmarketSans";
+}
+
+h1 {
+    font-family: "GmarketSans";
+    font-size: 40px;
+    color: #ff7145;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_txt {
+    font-family: "GmarketSans";
+    font-weight: lighter;
+}
+
+.blank {
+    height: 15px;
+}
+
+.blank_2 {
+    height: 40px;
+}
+.input {
+    background-image: url(../source/inputbox.png);
+    background-size: 240px 46px;
+    background-repeat: no-repeat;
+    border: none;
+    width: 240px;
+    height: 50px;
+    font-family: "GmarketSans";
+    text-align: center;
+}
+
+.submit_btn {
+    background-color: #ffa726;
+    width: 50px;
+    height: 30px;
+    border-radius: 10px;
+    border: #ffa726;
+    color: white;
+    font-family: "GmarketSans";
+}
+
+.test_btn {
+    width: 260px;
+    height: 54px;
+    background-color: #ff7145;
+    border: solid 2px white;
+    border-radius: 30px;
+    font-family: "GmarketSans";
+    font-size: 16px;
+    font-style: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: center;
+    color: white;
+}

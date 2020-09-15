@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'GmarketSans';
+    src: url("../fonts/GmarketSansTTFMedium.ttf");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-family: "GmarketSans";
+    font-size: 60px;
+    color: #ff7145;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

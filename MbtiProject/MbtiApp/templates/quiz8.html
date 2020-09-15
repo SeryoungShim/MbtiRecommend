@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" href="{% static 'css/quiz2.css' %}" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card_main">
+            <div class="blank"></div>
+            <br />
+            <h1> Q8. 상사한테 깨진 날 .. <br />퇴근하고 나서, 나는? </h1>
+            <br />
+            <div class="blank"></div>
+        </div>
+        
+        <form method="POST" action="{% url 'mbti' 9 %}">
+            {% csrf_token %}
+            <div class="card_quiz">
+                <button class="select_btn_1" value="E" name="select">친구들한테 "야 만나자ㅠ"<br />실컷 놀며
+                    풀기</button>
+                <br />
+                <button class="select_btn_2" value="I" name="select">친구한테 "아니 글쎄 오늘ㅠ"<br />집에서
+                    통화로 풀기</button>
+            </div>
+        </form>
+        <div class="bar">
+            <img src="{% static 'source/8P.png' %}" width="300" height="30" />
+        </div>
+    </div>
+</body>
+
+</html>

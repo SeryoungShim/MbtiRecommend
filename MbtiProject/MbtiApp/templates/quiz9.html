@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인공은 나야나</title>
+    <link rel="stylesheet" href="{% static 'css/quiz2.css' %}" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card_main">
+            <div class="blank"></div>
+            <br />
+            <h1> Q9. 드라마 주인공이 <br /> 예상과 다른 행동을 할 때, 나는? </h1>
+            <br />
+            <div class="blank"></div>
+        </div>
+        <form method="POST" action="{% url 'mbti' 10 %}">
+            {% csrf_token %}
+            <div class="card_quiz">
+                <button class="select_btn_2" value="T" name="select">이해가 돼야 공감을 하든
+                    말든..</button>
+                <br />
+                <button class="select_btn_1" value="F" name="select">이해가 안되는데 공감은 가네</button>
+            </div>
+        </form>
+        <div class="bar">
+            <img src="{% static 'source/9P.png' %}" width="300" height="30" />
+        </div>
+    </div>
+</body>
+
+</html>

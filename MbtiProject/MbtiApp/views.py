@@ -7,7 +7,27 @@ from .crawling import dramaCrawling as dc
 from .models import DramaInfo, Character
 
 # Create your views here.
+def home(request):
+    request.session["select"] = []
+    return render(request, "start.html")
 
+def mbti_home(request):
+    return render(request, "mbti_home.html")
+
+def mbti(request, quiz):
+    if request.POST:
+        request.session["select"] = request.session["select"] + [request.POST["select"]]
+        print(request.session["select"])
+    return render(request, "quiz" + str(quiz) + ".html")
+
+def result(request):
+    if request.POST:
+        request.session["select"] = request.session["select"] + [request.POST["select"]]
+        print(request.session["select"])
+    context = {
+        "mbti" : request.session["select"]
+    }
+    return render(request, "result.html", context)
 
 
 ### admin page "/adddrama/"
