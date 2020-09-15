@@ -8,22 +8,21 @@ from .models import DramaInfo, Character
 
 # Create your views here.
 def home(request):
-    request.session["select"] = []
     return render(request, "start.html")
 
 def mbti_home(request):
     return render(request, "mbti_home.html")
 
 def mbti(request, quiz):
+    if "select" not in request.session.keys():
+        request.session["select"] = []
     if request.POST:
         request.session["select"] = request.session["select"] + [request.POST["select"]]
-        print(request.session["select"])
     return render(request, "quiz" + str(quiz) + ".html")
 
 def result(request):
     if request.POST:
         request.session["select"] = request.session["select"] + [request.POST["select"]]
-        print(request.session["select"])
 
     # 여기서 mbti 계산
     context = {
