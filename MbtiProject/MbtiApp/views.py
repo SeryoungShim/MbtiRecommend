@@ -11,14 +11,14 @@ def addDrama(request):
     context = {}
 
     if request.POST:
-        #print(dc.getDrama("넝쿨째 굴러온 당신"))
+
         context["title"] = request.POST.get('search')
-        # 1. POST search 값 변수에 저장 - context["title"] 에 저장
-        # 2. db 드라마 제목에서 search 값이 있는지 확인
-        # 2-1. 있다면 db = True / drama = db읽어오기
-        if len(DramaInfo.objects.filter(title = context["title"])) != 0:
-            title = DramaInfo.objects.get(title = context["title"])
-            context['drama'] = title
+
+        context["drama_infos"] = []
+        if len(DramaInfo.objects.filter(title__icontains = context["title"])) != 0:
+            context['dramas'] = DramaInfo.objects.filter(title__icontains = context["title"])
+            for drama in context["dramas"]:
+                context["drama_infos"].append({"drama":drama, "characters":Character.objects.filter(drama=drama)})
             context["db"] = True
         # 2-2. 없다면 db = False
         else:
@@ -32,9 +32,13 @@ def crawlDrama(request, drama_name):
         "title":drama_name,   
     }
 
-    # crawling 진행 - 세령
-    drama = dc.getDrama(drama_name)
-    characters = dc.getCharacter(drama_name)
+    # crawling 진행
+    try:
+        drama = dc.getDrama(drama_name)
+        characters = dc.getCharacter(drama_name)
+    except:
+        # html 변경 예정
+        return render(request, "adddrama.html", context)
     context["db"] = True
 
     drama = DramaInfo.objects.create(
@@ -43,7 +47,7 @@ def crawlDrama(request, drama_name):
         plot=drama["plot"],
         site=drama["main_home"]
     )
-    context["drama"] = drama
+    context["dramas"] = [drama]
 
     for character in characters:
         Character.objects.create(
