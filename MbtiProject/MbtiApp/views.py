@@ -24,6 +24,8 @@ def result(request):
     if request.POST:
         request.session["select"] = request.session["select"] + [request.POST["select"]]
         print(request.session["select"])
+
+    # 여기서 mbti 계산
     context = {
         "mbti" : request.session["select"]
     }
