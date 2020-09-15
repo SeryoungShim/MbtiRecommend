@@ -51,7 +51,9 @@ def crawlDrama(request, drama_name):
             name = character["name"],
             poster = character["picture"],
             description = character["describe"],
+            # 키워드 뽑아내기
             personal = "#훗",
+            # mbti model 결과
             mbti = "INTJ"
         )
     context["character"] = Character.objects.filter(drama=drama)
