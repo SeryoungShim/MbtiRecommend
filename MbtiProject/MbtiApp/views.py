@@ -39,7 +39,7 @@ def crawlDrama(request, drama_name):
         drama = dc.getDrama(drama_name)
         characters = dc.getCharacter(drama_name)
     except:
-        # html 변경 예정
+        # 크롤링 실패 --> 직접 입력
         return render(request, "form.html", context)
     context["db"] = True
 

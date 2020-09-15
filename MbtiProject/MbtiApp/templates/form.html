@@ -35,7 +35,6 @@
     <script>
         var add_btn = document.getElementById("add");
         var div = document.querySelector(".character");
-        var cnt = 2;
         function clickAddHandler(){
             var new_div = document.createElement("div");
             div.appendChild(new_div);
@@ -53,7 +52,6 @@
             new_input.setAttribute("name", "desc[]");
             new_div.appendChild(new_input);
             console.log(new_div);
-            cnt += 1;
         }
         add_btn.addEventListener("click", clickAddHandler);
     </script>
