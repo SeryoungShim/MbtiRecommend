@@ -57,3 +57,19 @@ def crawlDrama(request, drama_name):
     context["character"] = Character.objects.filter(drama=drama)
 
     return render(request, "addDrama.html", context)
+
+def insertDrama(request):
+    context = {}
+    
+    if request.method == "POST":
+
+        drama = DramaInfo.objects.create(
+            title = request.POST['title'],
+            plot = request.POST['plot'],
+            image = request.POST['image'],
+            site = request.POST['site']
+        )
+        
+        context["drama"] = drama
+        
+    return render(request, 'form.html', context)
