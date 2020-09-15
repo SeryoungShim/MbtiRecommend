@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>직접 입력</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'insertDrama.css' %}">
 </head>
 <body>
     <h1>add by self</h1>
     <form action = "{% url 'insertDrama'%}" method = "POST">
     {% csrf_token %}
+    <label for="title">제목</label>
     <input placeholder = "드라마 제목" name = 'title'/>
     <br/>
-    <br/>
+    <label for="plot">줄거리</label>
     <input placeholder = "드라마 줄거리" name = 'plot'/>
     <br/>
-    <br/>
+    <label for="image">포스터</label>
     <input placeholder = "드라마 인물 관계도 or 포스터" name = 'image'/>
     <br/>
-    <br/>
+    <label for="site"">공식 사이트</label>
     <input placeholder = "드라마 공식사이트" name = 'site'/>
     <br/>
-    <br/>
     <div class="characters">
-        <div class="character">
-            <input placeholder="주인공 이름" name = "name[]"/>
-            <input placeholder="주인공 포스터" name = "poster[]"/>
-            <input placeholder="주인공 설명" name = "desc[]"/>
-        </div>
+        <h4>등장인물</h4>
+        <button type="button" id="add">add</button>
     </div>
-    <button type="button" id="add">add</button>
     <button type='submit'>등록하기 > </button>
     </form>
 
     <script>
         var add_btn = document.getElementById("add");
-        var div = document.querySelector(".character");
+        var div = document.querySelector(".characters");
         function clickAddHandler(){
             var new_div = document.createElement("div");
             div.appendChild(new_div);

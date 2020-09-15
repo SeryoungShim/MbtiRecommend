@@ -13,7 +13,7 @@ from .models import DramaInfo, Character
 ### admin page "/adddrama/"
 def addDrama(request):
     context = {}
-
+    
     if request.POST:
 
         context["title"] = request.POST.get('search')
