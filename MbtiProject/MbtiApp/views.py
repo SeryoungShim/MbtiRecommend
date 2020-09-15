@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Crawling
 from .crawling import dramaCrawling as dc
@@ -38,7 +38,7 @@ def crawlDrama(request, drama_name):
         characters = dc.getCharacter(drama_name)
     except:
         # html 변경 예정
-        return render(request, "adddrama.html", context)
+        return render(request, "form.html", context)
     context["db"] = True
 
     drama = DramaInfo.objects.create(
@@ -47,7 +47,6 @@ def crawlDrama(request, drama_name):
         plot=drama["plot"],
         site=drama["main_home"]
     )
-    context["dramas"] = [drama]
 
     for character in characters:
         Character.objects.create(
@@ -60,7 +59,7 @@ def crawlDrama(request, drama_name):
             # mbti model 결과
             mbti = "INTJ"
         )
-    context["character"] = Character.objects.filter(drama=drama)
+    context["drama_infos"] = [{"drama": drama, "characters": Character.objects.filter(drama=drama)}]
 
     return render(request, "addDrama.html", context)
 
@@ -78,4 +77,4 @@ def insertDrama(request):
         
         context["drama"] = drama
         
-    return render(request, 'form.html', context)
+    return render(request, "addDrama.html", context)
