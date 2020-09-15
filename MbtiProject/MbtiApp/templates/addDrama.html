@@ -15,10 +15,32 @@
     </form>
     <div class="container">
         {% if db %}
-            {{drama.title}} 
-            <img class="poster" src={{drama.image}}>
-            {{drama.plot}}
-            {{character}}
+            {% for drama in drama_infos %}
+            <div class="drama-container" id={{drama.drama.pk}}>
+                <div>
+                    <img class="poster" src={{drama.drama.image}} width="150px" height="200px">
+                </div>
+                <div>
+                    {{drama.drama.title}} 
+                    <p>{{drama.drama.plot}}</p>
+                </div>
+                
+            </div>
+            <div class="modal" id="modal-{{drama.drama.pk}}">
+                <div class="modal_content">
+                    <div class="btn">
+                        <h3>등장인물</h3>
+                        <button type="button" class="modal_close_btn" id="modal_close_btn-{{drama.drama.pk}}">X</button>
+                    </div>
+                    {% for char in drama.characters %}
+                    <img class="character" src={{char.poster}} width="100px" height="100px">
+                    {% endfor %}
+                </div>
+                <div class="modal_layer"></div>
+            </div>
+
+                </br>
+            {% endfor %}
         {% else %}
             {% if title %}
                 <a id="getCrawl" href="{% url 'crawlDrama' title %}">'{{title}}' 데이터 가져오기</a>
@@ -36,6 +58,28 @@
                 loading_img.style.display = "inline";
             });
         }
+
+        // modal
+        var container = document.querySelectorAll(".drama-container");
+        function clickOpenHandler(e){
+            var target = document.getElementById("modal-"+ e.target.id);
+            target.style.display = "block";
+            
+        }
+        for(var i=0;i<container.length;i++){
+            container[i].addEventListener("click", clickOpenHandler);
+        }
+
+        var modal_close_btn = document.querySelectorAll(".modal_close_btn");
+        function clickCloseHandler(e){
+            var target = document.getElementById("modal-" + e.target.id.split('-')[1]);
+            target.style.display = "none";
+        }
+        for(var i=0;i<modal_close_btn.length;i++){
+            modal_close_btn[i].addEventListener("click", clickCloseHandler);
+        }
+        
+        
     </script>
 </body>
 </html>
