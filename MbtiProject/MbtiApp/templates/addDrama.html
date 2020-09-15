@@ -62,7 +62,7 @@
         // modal
         var container = document.querySelectorAll(".drama-container");
         function clickOpenHandler(e){
-            var target = document.getElementById("modal-"+ e.target.id);
+            var target = document.getElementById("modal-"+ e.currentTarget.id);
             target.style.display = "block";
             
         }
