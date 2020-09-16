@@ -18,7 +18,7 @@
             <span class="main_txt">푹~ 빠져보세요!</span>
         </div>
         <div class="blank"></div>
-        <form method="POST" action="{% url 'result' %}">
+        <form method="POST" action="{% url 'result' %}" onsubmit="return isValidSubmit();">
             {% csrf_token %}
             <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px" name="mbti_input">
             <button class="submit_btn" type="submit">제출</button>
@@ -28,5 +28,20 @@
         <button class="test_btn" onclick='window.location.href="{% url 'mbti' 1 %}"'>모른다면, 검사하러 가기!</button>
     </div>
 </body>
+
+<script>
+    var mbti_input = document.querySelector(".input");
+    var submit_btn = document.querySelector(".submit_btn");
+
+    const mbtis = ["INTJ", "INTP", "ENTP", "ENTJ", "INFJ", "INFP", "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP"]
+    function isValidSubmit(){
+        console.log(mbti_input.value);
+        if (!mbtis.includes(mbti_input.value.toUpperCase())){
+            alert("오류!");
+            return false;
+        }
+    }
+</script>
+
 
 </html>
