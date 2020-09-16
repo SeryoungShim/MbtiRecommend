@@ -6,6 +6,13 @@ from .crawling import dramaCrawling as dc
 # DB
 from .models import DramaInfo, Character
 
+alpha_mbti = {
+    "EFNP":"ENFP", "EFJN":"ENFJ", "ENPT":"ENTP", "EJNT":"ENTJ",
+    "EFPS":"ESFP", "EFJS":"ESFJ", "EPST":"ESTP", "EJST":"ESTJ",
+    "FINP":"INFP", "FIJN":"INFJ", "INPT":"INTP", "IJNT":"INTJ",
+    "FIPS":"ISFP", "FIJS":"ISFJ", "IPST":"ISTP", "IJST":"ISTJ"
+}
+
 # Create your views here.
 def home(request):
     request.session["select"] = []
@@ -26,14 +33,18 @@ def result(request):
         if len(request.session["select"]) != 0:
             request.session["select"] = request.session["select"] + [request.POST["select"]]
             # 여기서 mbti 계산
+            lst = list(set(request.session["select"]))
+            for i in lst:
+                if request.session["select"].count(i) < 2:
+                    request.session["select"].remove(i)
+            mbti = alpha_mbti["".join(sorted(set(request.session["select"])))]
+            request.session["select"] = mbti
         else:
-            request.session["select"] = request.POST["mbti"].upper()
-            print(request.POST["mbti"])
+            mbti = request.POST["mbti"].upper()
+            request.session["select"] = mbti
 
-    # mbti = request.session["select"]
-    mbti = "INTJ"
     # random 숫자 5개 뽑기
-    characters = Character.objects.filter(mbti=mbti)[:10]
+    characters = Character.objects.filter(mbti=request.session["select"])[:10]
     context = {
         "same" : "반대",
         "same_url" : "reverse",
@@ -44,8 +55,27 @@ def result(request):
 
 def reverse(request):
     # mbti 반대로
-    mbti = "ESFP"
-    characters = Character.objects.filter(mbti=mbti)[:10]
+    mbti = request.session["select"]
+    mbti_reverse=[]
+    for i in mbti:
+        if "E" == i:
+            mbti_reverse.append("I")
+        elif "I" == i:
+            mbti_reverse.append("E")
+        elif 'N' == i:
+            mbti_reverse.append("S")
+        elif 'S' == i: 
+            mbti_reverse.append("N")
+        elif "F" == i:
+            mbti_reverse.append("T")
+        elif "T" == i:
+            mbti_reverse.append("F")
+        elif "J" == i:
+            mbti_reverse.append("P")
+        elif "P" == i:
+            mbti_reverse.append("J")
+    
+    characters = Character.objects.filter(mbti="".join(mbti_reverse))[:10]
     # random 5개
     context = {
         "same" : "같은",
@@ -53,6 +83,8 @@ def reverse(request):
         "mbti" : request.session["select"],
         "characters" : characters
     }
+    print("".join(mbti_reverse))
+
     return render(request, "result.html", context)
 
 
