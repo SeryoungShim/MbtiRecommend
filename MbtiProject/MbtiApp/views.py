@@ -34,7 +34,10 @@ def mbti(request, quiz):
 
 def result(request):
     if request.POST:
-        if type(request.session["mbti"]) == list:
+        if "mbti_input" in request.POST:
+            mbti = request.POST["mbti_input"].upper()
+            request.session["mbti"] = mbti
+        elif type(request.session["mbti"]) == list and len(request.session["mbti"]) != 0:
             mbtis = request.session["mbti"]
             if "select" in request.POST:
                 mbtis[-1] = request.POST["select"]
@@ -48,10 +51,6 @@ def result(request):
             
             mbti = alpha_mbti["".join(sorted(set(request.session["mbti"])))]
             request.session["mbti"] = mbti
-        else:
-            if "mbti_input" in request.POST:
-                mbti = request.POST["mbti_input"].upper()
-                request.session["mbti"] = mbti
 
     print(request.session["mbti"])
     # random 숫자 5개 뽑기
