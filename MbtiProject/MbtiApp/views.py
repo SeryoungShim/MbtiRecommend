@@ -25,16 +25,19 @@ def mbti(request, quiz):
     # if "select" not in request.session.keys():
     #     redirect(home)
     if request.POST:
-        mbtis = request.session["mbti"]
-        mbtis[quiz-2] = request.POST["select"]
-        request.session["mbti"] = mbtis
+        if type(request.session["mbti"]) == list:
+            mbtis = request.session["mbti"]
+            mbtis[quiz-2] = request.POST["select"]
+            request.session["mbti"] = mbtis
+    print(request.session["mbti"])
     return render(request, "quiz" + str(quiz) + ".html")
 
 def result(request):
     if request.POST:
         if type(request.session["mbti"]) == list:
             mbtis = request.session["mbti"]
-            mbtis[-1] = request.POST["select"]
+            if "select" in request.POST:
+                mbtis[-1] = request.POST["select"]
             request.session["mbti"] = mbtis
             print(request.session["mbti"])
             # 여기서 mbti 계산
@@ -56,7 +59,7 @@ def result(request):
     context = {
         "same" : "반대",
         "same_url" : "reverse",
-        "mbti" : request.session["select"],
+        "mbti" : request.session["mbti"],
         "characters" : characters
     }
     return render(request, "result.html", context)
