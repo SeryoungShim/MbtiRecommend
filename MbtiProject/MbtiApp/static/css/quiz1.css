@@ -8,6 +8,7 @@
   margin: 0px;
   font-family: "GmarketSans_B";
 }
+*:focus { outline:none; }
 
 body {
   height: 100vh;

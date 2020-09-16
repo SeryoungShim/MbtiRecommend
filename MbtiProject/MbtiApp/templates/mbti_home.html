@@ -26,12 +26,19 @@
             <span class="main_txt">푹~ 빠져보세요!</span>
         </div>
         <div class="blank"></div>
+<<<<<<< HEAD
         <form>
             <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px">
             <button class="submit_btn" class = "popup" type="submit">제출</button>
 
 
 
+=======
+        <form method="POST" action="{% url 'result' %}">
+            {% csrf_token %}
+            <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px" name="mbti">
+            <button class="submit_btn" type="submit">제출</button>
+>>>>>>> 85c86f62c97d25f6ec3bbc43d1c81e0b018c46b2
             <br />
         </form>
         <div class="blank_2"></div>

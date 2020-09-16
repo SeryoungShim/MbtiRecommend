@@ -3,11 +3,23 @@
   src : url("../fonts/GmarketSansTTFBold.ttf") format('truetype');
 }
 
+@font-face{
+  font-family : "GmarketSans_L";
+  src : url("../fonts/GmarketSansTTFLight.ttf") format('truetype');
+}
+
+@font-face{
+  font-family : "Uhbee";
+  src : url("../fonts/UhBee\ QUEEN\ J.ttf") format('truetype');
+}
+
+
 * {
     box-sizing: border-box;
     margin: 0px;
     font-family: "GmarketSans_B";
 }
+*:focus { outline:none; }
 
 body {
     height: 100vh;
@@ -17,10 +29,25 @@ body {
     align-items: center;
 }
 
+p {
+  font-family: "Uhbee";
+  font-size: 20px;
+}
 
+.card_msg {
+  font-family: "GmarketSans_L";
+  font-size: 15px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+}
 .card_slider {
     position: relative;
-    width: 60%; height: 60%;
+    width: 60%; height: 100%;
     display: flex;
     justify-content: center;
 
@@ -29,7 +56,7 @@ body {
 .card_slider button {
     position: absolute;
     z-index: 10;
-    top: 66%;
+    top: 50%;
     transform: translateY(-50%);
     width: 71px; height: 71px;
     border-radius: 100%;
@@ -70,8 +97,9 @@ body {
 }
 
 
+
 .card_maincontainer{
-  top : 35px;
+  /* top : 35px; */
   margin : 0 auto;
   display : flex;
   /* flex-direction: column; */
@@ -116,6 +144,20 @@ body {
   background-color: #d7ccc8;    
   text-align : center;
   transform : rotateY(180deg);
+}
+
+.plot_img {
+  margin : 0 auto;
+}
+
+.back_plot{
+  display : flex;
+  align-items : center;
+  margin : 0 auto;
+  width: 380px;
+  height: 120px;
+  font-family: "GmarketSans_B";
+  text-align : center;
 }
 
 .again{
@@ -178,4 +220,45 @@ body {
 .blank_2{
   width : 5px;
   height : 10px;
+}
+
+.front_main{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.character_img {
+  margin : 0 auto;
+}
+
+.character_drama {
+  font-family: "GmarketSans_B";
+  font-size: 20px;
+}
+.character_name {
+  font-family: "GmarketSans_B";
+  font-size: 40px;
+}
+
+.character_mbti {
+  font-family: "GmarketSans";
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  color: #434343;
+}
+
+.character_intro {
+  font-family: "Uhbee";
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.79;
+  letter-spacing: normal;
+  color: #000000;
 }

@@ -24,6 +24,7 @@ urlpatterns = [
     path('mbti/', views.mbti_home, name="mbti_home"),
     path('mbti/<int:quiz>', views.mbti, name="mbti"),
     path('result', views.result, name="result"),
+    path('reverse/', views.reverse, name="reverse"),
 
     ### admin
     path("adddrama/", views.addDrama, name="addDrama"),
