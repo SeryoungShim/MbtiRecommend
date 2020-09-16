@@ -6,53 +6,32 @@ from .crawling import dramaCrawling as dc
 # DB
 from .models import DramaInfo, Character
 
-alpha_mbti = {
-    "EFNP":"ENFP", "EFJN":"ENFJ", "ENPT":"ENTP", "EJNT":"ENTJ",
-    "EFPS":"ESFP", "EFJS":"ESFJ", "EPST":"ESTP", "EJST":"ESTJ",
-    "FINP":"INFP", "FIJN":"INFJ", "INPT":"INTP", "IJNT":"INTJ",
-    "FIPS":"ISFP", "FIJS":"ISFJ", "IPST":"ISTP", "IJST":"ISTJ"
-}
-
 # Create your views here.
 def home(request):
-    request.session["mbti"] = [""]*12
+    for i in range(12):
+        request.session[str(i)] = ""
     return render(request, "start.html")
 
 def mbti_home(request):
     return render(request, "mbti_home.html")
 
 def mbti(request, quiz):
-    # if "select" not in request.session.keys():
-    #     redirect(home)
     if request.POST:
-        if type(request.session["mbti"]) == list:
-            mbtis = request.session["mbti"]
-            mbtis[quiz-2] = request.POST["select"]
-            request.session["mbti"] = mbtis
-    print(request.session["mbti"])
+        request.session[quiz-2] = request.POST["select"]
+    else:
+        redirect(home)
     return render(request, "quiz" + str(quiz) + ".html")
 
 def result(request):
     if request.POST:
         if "mbti_input" in request.POST:
-            mbti = request.POST["mbti_input"].upper()
-            request.session["mbti"] = mbti
-        elif type(request.session["mbti"]) == list and len(request.session["mbti"]) != 0:
-            mbtis = request.session["mbti"]
-            if "select" in request.POST:
-                mbtis[-1] = request.POST["select"]
-            request.session["mbti"] = mbtis
-            print(request.session["mbti"])
+            request.session["mbti"] = request.POST["mbti_input"].upper()
+        else:
+            request.session["11"] = request.POST["select"]
             # 여기서 mbti 계산
-            lst = list(set(request.session["mbti"]))
-            for i in lst:
-                if request.session["mbti"].count(i) < 2:
-                    request.session["mbti"].remove(i)
-            
-            mbti = alpha_mbti["".join(sorted(set(request.session["mbti"])))]
-            request.session["mbti"] = mbti
-
-    print(request.session["mbti"])
+            request.session["mbti"] = get_mbti([request.session[str(i)] for i in range(12)])
+    else:
+        redirect(home)
     # random 숫자 5개 뽑기
     characters = Character.objects.filter(mbti=request.session["mbti"])[:10]
     context = {
@@ -61,6 +40,7 @@ def result(request):
         "mbti" : request.session["mbti"],
         "characters" : characters
     }
+    print(request.session["mbti"])
     return render(request, "result.html", context)
 
 def reverse(request):
@@ -96,6 +76,7 @@ def reverse(request):
     print("".join(mbti_reverse))
 
     return render(request, "result.html", context)
+
 
 
 ### admin page "/adddrama/"
@@ -181,3 +162,19 @@ def insertDrama(request):
         
         
     return render(request, "addDrama.html", context)
+
+
+### functions
+def get_mbti(mbtis):
+    alpha_mbti = {
+        "EFNP":"ENFP", "EFJN":"ENFJ", "ENPT":"ENTP", "EJNT":"ENTJ",
+        "EFPS":"ESFP", "EFJS":"ESFJ", "EPST":"ESTP", "EJST":"ESTJ",
+        "FINP":"INFP", "FIJN":"INFJ", "INPT":"INTP", "IJNT":"INTJ",
+        "FIPS":"ISFP", "FIJS":"ISFJ", "IPST":"ISTP", "IJST":"ISTJ"
+    }
+    lst = list(set(mbtis))
+    for i in lst:
+        if mbtis.count(i) < 2:
+            mbtis.remove(i)
+    
+    return alpha_mbti["".join(sorted(set(mbtis)))]
