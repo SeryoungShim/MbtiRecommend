@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주인공은 나야나</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/mbti_home.css' %}" />
-    <script>
-        function result(argFun) {
-            if(argFun == exist):
-                pass
+    <script LAUNGUAGE='JAVASCRIPT'>
+        function check(mbti) {
+            mbti_lst['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP']
+            if mbti not in mbti_lst:
+                alert('MBTI를 다시 체크해주세요!')
             else:
-                alert('')
+                pass
         }
     </script>
 </head>
@@ -26,19 +27,10 @@
             <span class="main_txt">푹~ 빠져보세요!</span>
         </div>
         <div class="blank"></div>
-<<<<<<< HEAD
-        <form>
-            <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px">
-            <button class="submit_btn" class = "popup" type="submit">제출</button>
-
-
-
-=======
         <form method="POST" action="{% url 'result' %}">
             {% csrf_token %}
             <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px" name="mbti">
-            <button class="submit_btn" type="submit">제출</button>
->>>>>>> 85c86f62c97d25f6ec3bbc43d1c81e0b018c46b2
+            <button class="submit_btn" value = 'mbti' type="submit" onclick=check()>제출</button>
             <br />
         </form>
         <div class="blank_2"></div>
