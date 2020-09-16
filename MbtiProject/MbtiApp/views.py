@@ -15,7 +15,7 @@ alpha_mbti = {
 
 # Create your views here.
 def home(request):
-    request.session["select"] = []
+    request.session["mbti"] = [""]*12
     return render(request, "start.html")
 
 def mbti_home(request):
@@ -25,26 +25,34 @@ def mbti(request, quiz):
     # if "select" not in request.session.keys():
     #     redirect(home)
     if request.POST:
-        request.session["select"] = request.session["select"] + [request.POST["select"]]
+        mbtis = request.session["mbti"]
+        mbtis[quiz-2] = request.POST["select"]
+        request.session["mbti"] = mbtis
     return render(request, "quiz" + str(quiz) + ".html")
 
 def result(request):
     if request.POST:
-        if len(request.session["select"]) != 0:
-            request.session["select"] = request.session["select"] + [request.POST["select"]]
+        if type(request.session["mbti"]) == list:
+            mbtis = request.session["mbti"]
+            mbtis[-1] = request.POST["select"]
+            request.session["mbti"] = mbtis
+            print(request.session["mbti"])
             # 여기서 mbti 계산
-            lst = list(set(request.session["select"]))
+            lst = list(set(request.session["mbti"]))
             for i in lst:
-                if request.session["select"].count(i) < 2:
-                    request.session["select"].remove(i)
-            mbti = alpha_mbti["".join(sorted(set(request.session["select"])))]
-            request.session["select"] = mbti
+                if request.session["mbti"].count(i) < 2:
+                    request.session["mbti"].remove(i)
+            
+            mbti = alpha_mbti["".join(sorted(set(request.session["mbti"])))]
+            request.session["mbti"] = mbti
         else:
-            mbti = request.POST["mbti"].upper()
-            request.session["select"] = mbti
+            if "mbti_input" in request.POST:
+                mbti = request.POST["mbti_input"].upper()
+                request.session["mbti"] = mbti
 
+    print(request.session["mbti"])
     # random 숫자 5개 뽑기
-    characters = Character.objects.filter(mbti=request.session["select"])[:10]
+    characters = Character.objects.filter(mbti=request.session["mbti"])[:10]
     context = {
         "same" : "반대",
         "same_url" : "reverse",
@@ -55,7 +63,7 @@ def result(request):
 
 def reverse(request):
     # mbti 반대로
-    mbti = request.session["select"]
+    mbti = request.session["mbti"]
     mbti_reverse=[]
     for i in mbti:
         if "E" == i:
@@ -80,7 +88,7 @@ def reverse(request):
     context = {
         "same" : "같은",
         "same_url" : "result",
-        "mbti" : request.session["select"],
+        "mbti" : request.session["mbti"],
         "characters" : characters
     }
     print("".join(mbti_reverse))
