@@ -20,7 +20,7 @@
         <div class="blank"></div>
         <form method="POST" action="{% url 'result' %}">
             {% csrf_token %}
-            <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px" name="mbti">
+            <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px" name="mbti_input">
             <button class="submit_btn" type="submit">제출</button>
             <br />
         </form>
