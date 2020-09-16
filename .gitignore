@@ -1,7 +1,6 @@
 .DS_Store
 .vscode
-MbtiProject/db.sqlite3
-**/db.sqlite3
+
 __pycache__
 
 **/migrations/**
