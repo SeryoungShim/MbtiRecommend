@@ -23,11 +23,35 @@ def mbti(request, quiz):
 
 def result(request):
     if request.POST:
-        request.session["select"] = request.session["select"] + [request.POST["select"]]
+        if len(request.session["select"]) != 0:
+            request.session["select"] = request.session["select"] + [request.POST["select"]]
+            # 여기서 mbti 계산
+        else:
+            request.session["select"] = request.POST["mbti"].upper()
+            print(request.POST["mbti"])
 
-    # 여기서 mbti 계산
+    # mbti = request.session["select"]
+    mbti = "INTJ"
+    # random 숫자 5개 뽑기
+    characters = Character.objects.filter(mbti=mbti)[:10]
     context = {
-        "mbti" : request.session["select"]
+        "same" : "반대",
+        "same_url" : "reverse",
+        "mbti" : request.session["select"],
+        "characters" : characters
+    }
+    return render(request, "result.html", context)
+
+def reverse(request):
+    # mbti 반대로
+    mbti = "ESFP"
+    characters = Character.objects.filter(mbti=mbti)[:10]
+    # random 5개
+    context = {
+        "same" : "같은",
+        "same_url" : "result",
+        "mbti" : request.session["select"],
+        "characters" : characters
     }
     return render(request, "result.html", context)
 

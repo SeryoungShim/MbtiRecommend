@@ -18,8 +18,9 @@
             <span class="main_txt">푹~ 빠져보세요!</span>
         </div>
         <div class="blank"></div>
-        <form>
-            <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px">
+        <form method="POST" action="{% url 'result' %}">
+            {% csrf_token %}
+            <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px" name="mbti">
             <button class="submit_btn" type="submit">제출</button>
             <br />
         </form>
