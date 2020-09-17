@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-
 # Crawling
 from .crawling import dramaCrawling as dc
-
 # DB
 from .models import DramaInfo, Character
+# Mbti prediction model
+from .MbtiJudge import mbti_call as mt
 
 # Create your views here.
 def home(request):
