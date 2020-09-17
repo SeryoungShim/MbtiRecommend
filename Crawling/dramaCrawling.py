@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import relationCrawling as rc
+import pandas as pd
 
 def getCharacter(title):
     url = "https://search.naver.com/search.naver?sm=top_hty&fbm=0&ie=utf8&query="+ title + " 등장인물"
@@ -41,7 +42,8 @@ def getCharacter(title):
         'describe': describe}
 
         char_data.append(cha)
-
+    char_data = pd.DataFrame(char_data)
+    print(char_data)
     return char_data
 
 
