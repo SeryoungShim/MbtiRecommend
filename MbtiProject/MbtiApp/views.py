@@ -112,33 +112,42 @@ def crawlDrama(request, drama_name):
         return render(request, "form.html", context)
     context["db"] = True
 
-    # drama = DramaInfo.objects.create(
-    #     title=drama["title"],
-    #     image=drama["poster"],
-    #     plot=drama["plot"],
-    #     site=drama["main_home"]
-    # )
+    drama = DramaInfo.objects.create(
+        title=drama["title"],
+        image=drama["poster"],
+        plot=drama["plot"],
+        site=drama["main_home"]
+    )
     
-    ### model ###
+    ### Model
+    mbti_model = mt.create_mbti_bert()
+    mbti_model.load_weights("MbtiApp/MbtiJudge/huggingface_mbi_bert.h5")
+    #테스트 셋 불러옴
+    test_set = mt.predict_load_data(characters)
+
+    #결과값 가져옴 preds로 만듦
+    preds = mbti_model.predict(test_set,verbose=1)
+
+    #preds mbti 데이터 프레임화 시켜서 반환시켜줌
+    preds_total = mt.mbti_result(preds)
+    
+    characters["mbti"] = preds_total["predict_mbti"]
+
     for index, row in characters.iterrows():
         # 여기서 db 작업 실행
-        print(row)
-        
-    # for character in characters:
-    #     Character.objects.create(
-    #         drama = drama,
-    #         name = character["name"],
-    #         poster = character["picture"],
-    #         description = character["describe"],
-    #         # 키워드 뽑아내기
-    #         personal = "#훗",
-    #         # mbti model 결과
-    #         mbti = "INTJ"
-    #     )
-    #context["drama_infos"] = [{"drama": drama, "characters": Character.objects.filter(drama=drama)}]
+        Character.objects.create(
+            drama = drama,
+            name = row["name"],
+            poster = row["picture"],
+            description = row["feature_total"],
+            # 키워드 뽑아내기
+            personal = "#훗",
+            # mbti model 결과
+            mbti = row["mbti"]
+        )
+    context["drama_infos"] = [{"drama": drama, "characters": Character.objects.filter(drama=drama)}]
 
-    #return render(request, "addDrama.html", context)
-    return render(request, "addDrama.html")
+    return render(request, "addDrama.html", context)
 
 def insertDrama(request):
     context = {}

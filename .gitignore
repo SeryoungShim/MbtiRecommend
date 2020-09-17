@@ -10,6 +10,8 @@ MbtiProject/db.sqlite3
 !**/migrations
 !**/migrations/__init__.py
 
+**/huggingface_mbi_bert.h5
+
 Pipfile
 Pipfile.lock
 
