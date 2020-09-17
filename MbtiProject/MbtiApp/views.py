@@ -68,7 +68,7 @@ def reverse(request):
 
     # random 5명
     characters = Character.objects.order_by("?").filter(mbti="".join(mbti_reverse))[:5]
-    characters = get_personal(characters)
+    characters = 
     context = {
         "same" : "같은",
         "same_url" : "result",
@@ -197,5 +197,5 @@ def get_mbti(mbtis):
 def get_personal(characters):
     for char in characters:
         char.personal = str(char.personal).split(",")
-
+    print(characters)
     return characters
