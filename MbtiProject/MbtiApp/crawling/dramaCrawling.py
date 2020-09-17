@@ -40,8 +40,7 @@ def getCharacter(title):
         cha = {
             'name': name,
             'picture': picture,
-            'describe': describe,
-            'feature_total':""
+            'feature_total': describe,
         }
 
         char_data.append(cha)
