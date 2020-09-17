@@ -68,7 +68,7 @@ def reverse(request):
 
     # random 5명
     characters = Character.objects.order_by("?").filter(mbti="".join(mbti_reverse))[:5]
-    characters = 
+    characters = get_personal(characters)
     context = {
         "same" : "같은",
         "same_url" : "result",
