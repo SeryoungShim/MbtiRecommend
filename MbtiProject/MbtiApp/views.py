@@ -34,6 +34,7 @@ def result(request):
         redirect(home)
     # random으로 5명
     characters = Character.objects.order_by("?").filter(mbti=request.session["mbti"])[:5]
+    characters = get_personal(characters)
     context = {
         "same" : "반대",
         "same_url" : "reverse",
@@ -67,13 +68,13 @@ def reverse(request):
 
     # random 5명
     characters = Character.objects.order_by("?").filter(mbti="".join(mbti_reverse))[:5]
+    characters = get_personal(characters)
     context = {
         "same" : "같은",
         "same_url" : "result",
         "mbti" : request.session["mbti"],
         "characters" : characters
     }
-    print("".join(mbti_reverse))
 
     return render(request, "result.html", context)
 
@@ -141,8 +142,8 @@ def crawlDrama(request, drama_name):
             poster = row["picture"],
             description = row["feature_total"],
             # 키워드 뽑아내기
-            personal = "#훗",
-            # mbti model 결과
+            personal = "#훗, #후훗",
+            # mbti model 결과 - 완료
             mbti = row["mbti"]
         )
     context["drama_infos"] = [{"drama": drama, "characters":Character.objects.filter(drama=drama)}]
@@ -191,3 +192,10 @@ def get_mbti(mbtis):
             mbtis.remove(i)
     
     return alpha_mbti["".join(sorted(set(mbtis)))]
+
+# 성격 키워드 , 기준으로 나누기
+def get_personal(characters):
+    for char in characters:
+        char.personal = str(char.personal).split(",")
+
+    return characters

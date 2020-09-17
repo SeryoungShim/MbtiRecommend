@@ -33,12 +33,11 @@
                             <div class="character_name">{{char.name}}</div>
                             <div class="character_mbti">{{char.mbti}}</div>
                             <div class="character_intro">
-                                <!-- desc 부분 split 해서 저장-->
-                                원칙주의자하우스푸어
-                                <br />
-                                합리적비혼주의자
-                                <br />
-                                결혼말고연애앱 수석디자이너
+                                <!-- desc 부분 split 해서 저장-->          
+                                {% for p in char.personal %}
+                                    {{p}}
+                                    <br />
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
