@@ -112,27 +112,33 @@ def crawlDrama(request, drama_name):
         return render(request, "form.html", context)
     context["db"] = True
 
-    drama = DramaInfo.objects.create(
-        title=drama["title"],
-        image=drama["poster"],
-        plot=drama["plot"],
-        site=drama["main_home"]
-    )
+    # drama = DramaInfo.objects.create(
+    #     title=drama["title"],
+    #     image=drama["poster"],
+    #     plot=drama["plot"],
+    #     site=drama["main_home"]
+    # )
+    
+    ### model ###
+    for index, row in characters.iterrows():
+        # 여기서 db 작업 실행
+        print(row)
+        
+    # for character in characters:
+    #     Character.objects.create(
+    #         drama = drama,
+    #         name = character["name"],
+    #         poster = character["picture"],
+    #         description = character["describe"],
+    #         # 키워드 뽑아내기
+    #         personal = "#훗",
+    #         # mbti model 결과
+    #         mbti = "INTJ"
+    #     )
+    #context["drama_infos"] = [{"drama": drama, "characters": Character.objects.filter(drama=drama)}]
 
-    for character in characters:
-        Character.objects.create(
-            drama = drama,
-            name = character["name"],
-            poster = character["picture"],
-            description = character["describe"],
-            # 키워드 뽑아내기
-            personal = "#훗",
-            # mbti model 결과
-            mbti = "INTJ"
-        )
-    context["drama_infos"] = [{"drama": drama, "characters": Character.objects.filter(drama=drama)}]
-
-    return render(request, "addDrama.html", context)
+    #return render(request, "addDrama.html", context)
+    return render(request, "addDrama.html")
 
 def insertDrama(request):
     context = {}

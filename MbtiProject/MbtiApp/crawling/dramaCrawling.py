@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from .relationCrawling import getJtbcRel, getJtbc, getMbc, getTvn
+import pandas as pd
 
 def getCharacter(title):
     url = "https://search.naver.com/search.naver?sm=top_hty&fbm=0&ie=utf8&query="+ title + " 등장인물"
@@ -36,12 +37,15 @@ def getCharacter(title):
         # 인물 설명
         describe = character_info.select_one('div.rel_answer_wrap._accordion > div > div.detail_info > div > span').get_text()
 
-        cha = {'name': name,
-        'picture': picture,
-        'describe': describe}
+        cha = {
+            'name': name,
+            'picture': picture,
+            'describe': describe,
+            'feature_total':""
+        }
 
         char_data.append(cha)
-
+    char_data = pd.DataFrame(char_data)
     return char_data
 
 
