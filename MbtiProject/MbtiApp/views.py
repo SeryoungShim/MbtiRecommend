@@ -32,8 +32,8 @@ def result(request):
             request.session["mbti"] = get_mbti([request.session[str(i)] for i in range(12)])
     else:
         redirect(home)
-    # random 숫자 5개 뽑기
-    characters = Character.objects.filter(mbti=request.session["mbti"])[:10]
+    # random으로 5명
+    characters = Character.objects.order_by("?").filter(mbti=request.session["mbti"])[:5]
     context = {
         "same" : "반대",
         "same_url" : "reverse",
@@ -64,9 +64,9 @@ def reverse(request):
             mbti_reverse.append("P")
         elif "P" == i:
             mbti_reverse.append("J")
-    
-    characters = Character.objects.filter(mbti="".join(mbti_reverse))[:10]
-    # random 5개
+
+    # random 5명
+    characters = Character.objects.order_by("?").filter(mbti="".join(mbti_reverse))[:5]
     context = {
         "same" : "같은",
         "same_url" : "result",
@@ -145,14 +145,14 @@ def crawlDrama(request, drama_name):
             # mbti model 결과
             mbti = row["mbti"]
         )
-    context["drama_infos"] = [{"drama": drama, "characters": Character.objects.filter(drama=drama)}]
+    context["drama_infos"] = [{"drama": drama, "characters":Character.objects.filter(drama=drama)}]
 
     return render(request, "addDrama.html", context)
 
 def insertDrama(request):
     context = {}
     
-    if request.method == "POST":
+    if request.POST:
 
         drama = DramaInfo.objects.create(
             title = request.POST['title'],
@@ -160,8 +160,6 @@ def insertDrama(request):
             image = request.POST['image'],
             site = request.POST['site']
         )
-        
-        # context["drama_infos"] = {"drama":drama}
         names = request.POST.getlist('name[]')
         posters = request.POST.getlist('poster[]')
         desc = request.POST.getlist('desc[]')
@@ -174,7 +172,7 @@ def insertDrama(request):
                 personal = "#훗",
                 mbti = "INTJ"
             )
-        
+        context["drama_infos"] = [{"drama": drama, "characters":Character.objects.filter(drama=drama)}]    
         
     return render(request, "addDrama.html", context)
 
