@@ -3,6 +3,7 @@
     src: url("../fonts/GmarketSansTTFMedium.ttf");
 }
 
+
 * {
     box-sizing: border-box;
     margin: 0px;
@@ -19,7 +20,7 @@ body {
 
 h1 {
     font-family: "GmarketSans";
-    font-size: 40px;
+    font-size: 46px;
     color: #ff7145;
 }
 

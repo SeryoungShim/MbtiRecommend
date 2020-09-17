@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
 
 <body>
     <div class="main">
-        <h1>MBTI 입력하기</h1>
+        <h1>나와 닮은 주인공은 누굴까?</h1>
         <div class="blank"></div>
         <div class="main_msg">
             <span class="main_txt">성격 정보만을 입력해</span>
@@ -20,12 +21,12 @@
         <div class="blank"></div>
         <form method="POST" action="{% url 'result' %}" onsubmit="return isValidSubmit();">
             {% csrf_token %}
-            <input class="input" placeholder="알고 있다면, 여기에 바로 입력" width="240px" height="50px" name="mbti_input">
+            <input class="input" placeholder="mbti를 바로 입력할게요!" width="240px" height="50px" name="mbti_input">
             <button class="submit_btn" type="submit">제출</button>
             <br />
         </form>
         <div class="blank_2"></div>
-        <button class="test_btn" onclick='window.location.href="{% url 'mbti' 1 %}"'>모른다면, 검사하러 가기!</button>
+        <button class="test_btn" onclick='window.location.href="{% url 'mbti' 1 %}"'>mbti 입력 없이, 저를 소개할래요!</button>
     </div>
 </body>
 
@@ -34,9 +35,9 @@
     var submit_btn = document.querySelector(".submit_btn");
 
     const mbtis = ["INTJ", "INTP", "ENTP", "ENTJ", "INFJ", "INFP", "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP"]
-    function isValidSubmit(){
+    function isValidSubmit() {
         console.log(mbti_input.value);
-        if (!mbtis.includes(mbti_input.value.toUpperCase())){
+        if (!mbtis.includes(mbti_input.value.toUpperCase())) {
             alert("오류!");
             return false;
         }
