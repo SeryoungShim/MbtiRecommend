@@ -83,6 +83,8 @@ def reverse(request):
 ### admin page "/adddrama/"
 def addDrama(request):
     # Mbti prediction model
+    if request.user.username != "admin":
+        return redirect(home)
     context = {}
     if request.POST:
 
