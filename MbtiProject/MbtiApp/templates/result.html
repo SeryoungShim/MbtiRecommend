@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,13 +49,14 @@
                         <img class="plot_img" src="{{char.drama.image}}" width=350px; height=380px; />
                         <br />
                         <div class="back_plot">{{char.drama.plot}}</div>
-
+                        <div class="back_url"> <a href="{{char.drama.site}}" target="_blank">{{char.drama.site}}</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         {% endfor %}
-        
+
 
     </section>
 

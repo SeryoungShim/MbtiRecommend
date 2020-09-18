@@ -155,8 +155,16 @@ p {
   align-items : center;
   margin : 0 auto;
   width: 380px;
-  height: 120px;
+  height: 90px;
   font-family: "GmarketSans_B";
+  text-align : center;
+}
+
+.back_url {
+  font-family: "Uhbee";
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
   text-align : center;
 }
 
@@ -262,3 +270,4 @@ p {
   letter-spacing: normal;
   color: #000000;
 }
+
