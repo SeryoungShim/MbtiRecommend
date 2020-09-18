@@ -6,6 +6,8 @@ from .models import DramaInfo, Character
 # Mbti prediction model
 from .MbtiJudge import mbti_call as mt
 
+from .keyword import keyword as kw
+
 # Create your views here.
 def home(request):
     for i in range(12):
@@ -134,6 +136,8 @@ def crawlDrama(request, drama_name):
     
     characters["mbti"] = preds_total["predict_mbti"]
 
+    characters = kw.get_keyword(characters)
+
     for index, row in characters.iterrows():
         # 여기서 db 작업 실행
         Character.objects.create(
@@ -142,7 +146,7 @@ def crawlDrama(request, drama_name):
             poster = row["picture"],
             description = row["feature_total"],
             # 키워드 뽑아내기
-            personal = "#훗, #후훗",
+            personal = row["personal"],
             # mbti model 결과 - 완료
             mbti = row["mbti"]
         )
@@ -196,6 +200,6 @@ def get_mbti(mbtis):
 # 성격 키워드 , 기준으로 나누기
 def get_personal(characters):
     for char in characters:
-        char.personal = str(char.personal).split(",")
+        char.personal = str(char.personal).split()[:3]
     print(characters)
     return characters
