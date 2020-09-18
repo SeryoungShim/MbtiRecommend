@@ -3,8 +3,6 @@ from django.shortcuts import render, redirect
 from .crawling import dramaCrawling as dc
 # DB
 from .models import DramaInfo, Character
-# Mbti prediction model
-from .MbtiJudge import mbti_call as mt
 
 from .keyword import keyword as kw
 
@@ -84,8 +82,8 @@ def reverse(request):
 
 ### admin page "/adddrama/"
 def addDrama(request):
+    # Mbti prediction model
     context = {}
-    
     if request.POST:
 
         context["title"] = request.POST.get('search')
@@ -102,6 +100,7 @@ def addDrama(request):
     return render(request, "addDrama.html", context)
 
 def crawlDrama(request, drama_name):
+    from .MbtiJudge import mbti_call as mt
     context = {
         "title":drama_name,   
     }

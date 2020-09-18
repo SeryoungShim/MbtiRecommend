@@ -13,7 +13,8 @@ def get_keyword(characters):
 
     # stopwords 제거
     for sw in stopwords:
-        nouns.remove(sw)
+        if sw in nouns:
+            nouns.remove(sw)
     
     personal = []
     for i, row in characters.iterrows():
