@@ -8,7 +8,6 @@ import pandas as pd
 from tqdm import tqdm
 import os
 
-
 tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 
 #모델 생성 - 버트모델 가중치는 따로 불러옴
