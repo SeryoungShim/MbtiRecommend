@@ -157,22 +157,22 @@ def predict_load_data(pandas_dataframe):
 def mbti_result(preds):
     mbti_e_i ,mbti_n_s , mbti_f_t , mbti_j_p = [] , [] , [], []
     for i in range(0,len(preds[0])):
-        if preds[0][i] > preds[0].mean():
+        if preds[0][i] > 0.5:
             mbti_e_i.append('I')
         else:
             mbti_e_i.append('E')
     for i in range(0,len(preds[1])):
-        if preds[1][i] > preds[1].mean():
+        if preds[1][i] > np.median(preds[1]):
             mbti_n_s.append('S')
         else:
             mbti_n_s.append('N')
     for i in range(0,len(preds[2])):
-        if preds[2][i] > preds[2].mean():
+        if preds[2][i] > 0.5:
             mbti_f_t.append('T')
         else:
             mbti_f_t.append('F')
     for i in range(0,len(preds[3])):
-        if preds[3][i] > preds[3].mean():
+        if preds[3][i] > 0.5:
             mbti_j_p.append('P')
         else:
             mbti_j_p.append('J')

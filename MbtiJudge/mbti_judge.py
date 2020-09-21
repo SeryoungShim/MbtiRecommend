@@ -22,7 +22,7 @@ train_x, train1_y, train2_y, train3_y , train4_y = mt.load_data(train)
 #이부분 부터 뷰에서 필요 모델불러옴
 mbti_model = mt.create_mbti_bert()
 #가중치 조정
-mbti_model.load_weights("huggingface_mbi_bert.h5")
+mbti_model.load_weights("newhuggingfacembti_bert.h5")
 
 
 #테스트 셋 불러옴
