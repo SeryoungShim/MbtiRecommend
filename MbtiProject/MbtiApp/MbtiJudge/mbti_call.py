@@ -5,6 +5,7 @@ from transformers import *
 import json
 from tqdm import tqdm
 import os
+import multiprocessing
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 
@@ -104,4 +105,5 @@ def mbti_result(preds):
     preds_total = pd.DataFrame({'preds_e_i':mbti_e_i,'preds_n_s':mbti_n_s,'preds_f_t':mbti_f_t,'preds_j_p':mbti_j_p})
     preds_total['predict_mbti'] = preds_total['preds_e_i'] + preds_total['preds_n_s'] + preds_total['preds_f_t'] + preds_total['preds_j_p']
     preds_total.drop(['preds_e_i','preds_n_s','preds_f_t','preds_j_p'],axis=1,inplace=True)
+
     return preds_total

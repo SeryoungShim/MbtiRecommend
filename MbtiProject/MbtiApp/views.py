@@ -5,7 +5,14 @@ from .crawling import dramaCrawling as dc
 from .models import DramaInfo, Character
 
 from .keyword import keyword as kw
+from .MbtiJudge import mbti_call as mt
 
+def get_model():
+    mbti_model = mt.create_mbti_bert()
+    mbti_model.load_weights("MbtiApp/MbtiJudge/huggingface_mbi_bert.h5")
+    return mbti_model
+
+mbti_model = get_model()
 # Create your views here.
 def home(request):
     for i in range(12):
@@ -102,7 +109,6 @@ def addDrama(request):
     return render(request, "addDrama.html", context)
 
 def crawlDrama(request, drama_name):
-    from .MbtiJudge import mbti_call as mt
     context = {
         "title":drama_name,   
     }
@@ -124,8 +130,7 @@ def crawlDrama(request, drama_name):
     )
     
     ### Model
-    mbti_model = mt.create_mbti_bert()
-    mbti_model.load_weights("MbtiApp/MbtiJudge/huggingface_mbi_bert.h5")
+
     #테스트 셋 불러옴
     test_set = mt.predict_load_data(characters)
 
